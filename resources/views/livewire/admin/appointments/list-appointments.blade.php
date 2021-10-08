@@ -1,3 +1,75 @@
 <div>
-    {{-- Because she competes with no one, no one can compete with her. --}}
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Appointments</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+                        <li class="breadcrumb-item active">Appointments</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- /.col-md-12 -->
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-tools">
+                                <a href="{{ route('admin.appointments.create') }}" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i>
+                                    &nbsp; Add Appointment
+                                </a>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body table-responsive">
+                            <table class="table table-hover text-nowrap">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Client Name</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Status</th>
+                                    <th class="text-right">Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Namez</td>
+                                    <td>20/12/1993</td>
+                                    <td>12:00 AM</td>
+                                    <td>Open</td>
+                                    <td>
+                                    <td class="text-right">
+                                        <button type="button" class="btn btn-info btn-sm"><i class="fas fa-eye"></i></button>
+                                        <button type="button" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></button>
+                                        <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer"></div>
+                    </div>
+                </div>
+                <!-- /.col-md-12 -->
+            </div>
+            <!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
 </div>

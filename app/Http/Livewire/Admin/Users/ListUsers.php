@@ -13,13 +13,17 @@ class ListUsers extends AdminComponent
     public $user_id;
     public $show_edit_modal = false;
 
-    public function add_user()
+    protected $listeners = [
+        'confirm_destroy' => 'confirm_destroy'
+    ];
+
+    public function create()
     {
         $this->state = [];
         $this->dispatchBrowserEvent('show-form');
     }
 
-    public function create_user()
+    public function store()
     {
         $validate_data = Validator::make($this->state, [
             'name' => 'required',
@@ -36,12 +40,20 @@ class ListUsers extends AdminComponent
             'password' => bcrypt($this->state['password']),
         ]);
 
-        $this->dispatchBrowserEvent('hide-form', ['message' => 'User added successfully!']);
+        $this->dispatchBrowserEvent('hide-form', ['message' => 'User created successfully!']);
 
         return redirect()->back();
     }
 
-    public function update_user()
+    public function edit(User $user)
+    {
+        $this->show_edit_modal = true;
+        $this->user = $user;
+        $this->state = $user->toArray();
+        $this->dispatchBrowserEvent('show-form');
+    }
+
+    public function update()
     {
         $validate_data = Validator::make($this->state, [
             'name' => 'required',
@@ -55,23 +67,23 @@ class ListUsers extends AdminComponent
 
         $this->user->update($validate_data);
 
-        $this->dispatchBrowserEvent('hide-form', ['message' => 'User added successfully!']);
+        $this->dispatchBrowserEvent('hide-form', ['message' => 'User updated successfully!']);
 
         return redirect()->back();
-    }
-
-    public function edit(User $user)
-    {
-        $this->show_edit_modal = true;
-        $this->user = $user;
-        $this->state = $user->toArray();
-        $this->dispatchBrowserEvent('show-form');
     }
 
     public function destroy($user_id)
     {
         $this->user_id = $user_id;
         $this->dispatchBrowserEvent('show-delete-confirmation');
+    }
+
+    public function confirm_destroy()
+    {
+        $data = User::findOrFail($this->user_id);
+        $data->delete();
+
+        $this->dispatchBrowserEvent('deleted', ['message' => 'User deleted successfully.']);
     }
 
     public function render()

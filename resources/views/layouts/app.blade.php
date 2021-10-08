@@ -14,8 +14,13 @@
     <link rel="stylesheet" href="{{ asset('backend/dist/css/adminlte.min.css') }}">
     <!-- Toastr  -->
     <link href="{{ asset('backend/plugins/toastr/toastr.min.css') }}" rel="stylesheet"/>
-    <!-- Live wire style -->
-    @livewireStyles
+    <!-- Date Time Picker  -->
+    <link href="{{ asset('backend/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}"
+          rel="stylesheet"/>
+    <!-- Custom style -->
+@stack('styles')
+<!-- Live wire style -->
+    <livewire:styles/>
 </head>
 <body class="hold-transition sidebar-mini text-sm">
 <div class="wrapper">
@@ -58,28 +63,31 @@
 <script src="{{ asset('backend/dist/js/adminlte.min.js') }}"></script>
 <!-- Toastr -->
 <script src="{{ asset('backend/plugins/toastr/toastr.min.js') }}"></script>
-<!-- Sweet Alert -->
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- Date Time Picker  -->
+<script src="https://unpkg.com/moment"></script>
+<script src="{{ asset('backend/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
+
 <script>
-    window.addEventListener('show-delete-confirmation', event => {
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Swal.fire(
-                    'Deleted!',
-                    'Your file has been deleted.',
-                    'success'
-                )
-            }
-        })
-    })
+    $(document).ready(function () {
+        $('#appointmentDate').datetimepicker({
+            format: 'L'
+        });
+
+        $('#appointmentDate').on("change.datetimepicker", function (e) {
+            let date = $(this).data('appointmentdate')
+            eval(date).set('state.date', $('#appointmentDateInput').val())
+        });
+
+        $('#appointmentTime').datetimepicker({
+            format: 'LT'
+        });
+
+        $('#appointmentTime').on("change.datetimepicker", function (e) {
+            let time = $(this).data('appointmenttime')
+            eval(time).set('state.time', $('#appointmentTimeInput').val())
+        });
+    });
+
 </script>
 
 <script>
@@ -90,7 +98,7 @@
         }
 
         window.addEventListener('hide-form', event => {
-            $('#modal-form').modal('hide');
+            $('#cu-form').modal('hide');
             toastr.success(event.detail.message, 'Success!')
         })
     });
@@ -98,11 +106,13 @@
 
 <script>
     window.addEventListener('show-form', event => {
-        $('#modal-form').modal('show');
+        $('#cu-form').modal('show');
     })
 </script>
 
-<!-- Livewire script -->
-@livewireScripts
+<!-- Custom Script -->
+@stack('js')
+<!-- Livewire Script -->
+<livewire:scripts/>
 </body>
 </html>

@@ -26,7 +26,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="card-tools">
-                                <button class="btn btn-primary btn-sm" wire:click="add_user"><i class="fas fa-plus"></i>
+                                <button class="btn btn-primary btn-sm" wire:click="create"><i class="fas fa-plus"></i>
                                     &nbsp; Add User
                                 </button>
                             </div>
@@ -45,13 +45,15 @@
                                 <tbody>
                                 @foreach($users as $key => $user)
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $users->firstItem() + $key }}</td>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td class="text-right">
+                                            <button type="button" class="btn btn-info btn-sm"><i class="fas fa-eye"></i></button>
                                             <button type="button" wire:click.prevent="edit({{ $user }})"
                                                     class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></button>
-                                            <button type="button" wire:click.prevent="destroy({{ $user->id }})" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+                                            <button type="button" wire:click.prevent="destroy({{ $user->id }})"
+                                                    class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -72,23 +74,23 @@
     <!-- /.content -->
 
     <!-- form modal -->
-    <div class="modal fade" id="modal-form" tabindex="-1" aria-labelledby="modal-form-label" aria-hidden="true"
+    <div class="modal fade" id="cu-form" tabindex="-1" aria-labelledby="cu-form-label" aria-hidden="true"
          wire:ignore.self>
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modal-form-label">
+                    <h5 class="modal-title" id="cu-form-label">
                         @if($show_edit_modal)
-                            <span>Edit New User</span>
+                            <span>Edit User</span>
                         @else
-                            <span>Add New User</span>
+                            <span>Add User</span>
                         @endif
                     </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form autocomplete="off" wire:submit.prevent="{{ $show_edit_modal ? 'update_user' : 'create_user' }}">
+                <form autocomplete="off" wire:submit.prevent="{{ $show_edit_modal ? 'update' : 'store' }}">
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="name">Full Name</label>
@@ -130,12 +132,13 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times"></i> Close</button>
                         <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i>
                             @if($show_edit_modal)
-                                <span>Update</span>
+                                <span> Update</span>
                             @else
-                                <span>Save</span>
+                                <span> Save</span>
                             @endif
                         </button>
                     </div>
@@ -144,4 +147,8 @@
         </div>
     </div>
     <!-- /. form modal -->
+
+    <!-- confirmation-alert components -->
+    <x-confirmation-alert/>
+    <!-- /. confirmation-alert components -->
 </div>
