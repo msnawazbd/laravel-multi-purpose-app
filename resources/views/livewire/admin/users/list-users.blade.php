@@ -39,6 +39,8 @@
                                     <th>ID</th>
                                     <th>Full Name</th>
                                     <th>Email</th>
+                                    <th>Created At</th>
+                                    <th>Updated At</th>
                                     <th class="text-right">Action</th>
                                 </tr>
                                 </thead>
@@ -48,6 +50,8 @@
                                         <td>{{ $users->firstItem() + $key }}</td>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
+                                        <td>{{ $user->created_at->toFormattedDate() }}</td>
+                                        <td>{{ $user->updated_at->toFormattedDate() }}</td>
                                         <td class="text-right">
                                             <button type="button" class="btn btn-info btn-sm"><i class="fas fa-eye"></i></button>
                                             <button type="button" wire:click.prevent="edit({{ $user }})"

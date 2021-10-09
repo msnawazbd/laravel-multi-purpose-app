@@ -67,7 +67,7 @@
 <script src="https://unpkg.com/moment"></script>
 <script src="{{ asset('backend/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
 
-<script>
+{{--<script>
     $(document).ready(function () {
         $('#appointmentDate').datetimepicker({
             format: 'L'
@@ -88,7 +88,7 @@
         });
     });
 
-</script>
+</script>--}}
 
 <script>
     $(document).ready(function () {

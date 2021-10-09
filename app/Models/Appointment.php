@@ -15,4 +15,19 @@ class Appointment extends Model
         'date' => 'datetime',
         'time' => 'datetime',
     ];
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class, 'client_id');
+    }
+
+    public function getStatusBadgeAttribute()
+    {
+        $badge = [
+            'SCHEDULE' => 'primary',
+            'CLOSED' => 'success',
+        ];
+
+        return $badge[$this->status];
+    }
 }

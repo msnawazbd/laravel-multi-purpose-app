@@ -26,7 +26,8 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="card-tools">
-                                <a href="{{ route('admin.appointments.create') }}" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i>
+                                <a href="{{ route('admin.appointments.create') }}" class="btn btn-primary btn-sm"><i
+                                        class="fas fa-plus"></i>
                                     &nbsp; Add Appointment
                                 </a>
                             </div>
@@ -45,20 +46,27 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Namez</td>
-                                    <td>20/12/1993</td>
-                                    <td>12:00 AM</td>
-                                    <td>Open</td>
-                                    <td>
-                                    <td class="text-right">
-                                        <button type="button" class="btn btn-info btn-sm"><i class="fas fa-eye"></i></button>
-                                        <button type="button" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></button>
-                                        <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
-                                    </td>
-                                    </td>
-                                </tr>
+                                @foreach($appointments as $key => $appointment)
+                                    <tr>
+                                        <td>{{ $appointments->firstItem() + $key }}</td>
+                                        <td>{{ $appointment->client->name }}</td>
+                                        <td>{{ $appointment->date->toFormattedDate() }}</td>
+                                        <td>{{ $appointment->time->toFormattedTime() }}</td>
+                                        <td>
+                                            <span
+                                                class="badge badge-{{ $appointment->status_badge }}">{{ $appointment->status }}</span>
+                                        </td>
+                                        <td class="text-right">
+                                            <button type="button" class="btn btn-info btn-sm"><i class="fas fa-eye"></i>
+                                            </button>
+                                            <a href="{{ route('admin.appointments.edit', $appointment) }}" class="btn btn-primary btn-sm"><i
+                                                    class="fas fa-edit"></i></a>
+                                            <button type="button" class="btn btn-danger btn-sm"><i
+                                                    class="fas fa-trash"></i></button>
+                                        </td>
+                                        </td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>

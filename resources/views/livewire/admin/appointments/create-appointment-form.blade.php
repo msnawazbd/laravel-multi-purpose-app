@@ -49,33 +49,41 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <!-- Date -->
                                         <div class="form-group">
-                                            <label>Date:</label>
-                                            <div wire:ignore class="input-group date" id="appointmentDate" data-target-input="nearest" data-appointmentdate="@this">
-                                                <input type="text" class="form-control datetimepicker-input" data-target="#appointmentDate" id="appointmentDateInput"/>
-                                                <div class="input-group-append" data-target="#appointmentDate" data-toggle="datetimepicker">
-                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                            <label for="appointmentTime">Appointment Time</label>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fas fa-clock"></i></span>
                                                 </div>
+                                                <x-timepicker wire:model.defer="state.time" id="appointment_time" :error="'time'" />
+                                                @error('time')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <!-- Time -->
                                         <div class="form-group">
-                                            <label>Date:</label>
-                                            <div wire:ignore class="input-group date" id="appointmentTime" data-target-input="nearest" data-appointmenttime="@this">
-                                                <input type="text" class="form-control datetimepicker-input" data-target="#appointmentTime" id="appointmentTimeInput"/>
-                                                <div class="input-group-append" data-target="#appointmentTime" data-toggle="datetimepicker">
-                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                            <label for="appointmentDate">Appointment Date</label>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fas fa-calendar"></i></span>
                                                 </div>
+                                                <x-datepicker wire:model.defer="state.date" id="appointment_date" :error="'date'" />
+                                                @error('date')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
-                                        <div class="form-group">
+                                        <div wire:ignore class="form-group">
                                             <label for="note">Note:</label>
-                                            <textarea class="form-control" wire:model.defer="state.note" id="note"></textarea>
+                                            <textarea id="note" data-note="@this" wire:model.defer="state.note" class="form-control"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -95,3 +103,4 @@
     </div>
     <!-- /.content -->
 </div>
+@include('livewire/admin/appointments/appointment-js')
