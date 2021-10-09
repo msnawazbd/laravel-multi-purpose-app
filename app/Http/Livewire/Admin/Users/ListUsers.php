@@ -12,6 +12,7 @@ class ListUsers extends AdminComponent
     public $user;
     public $user_id;
     public $show_edit_modal = false;
+    public $search_keywords = null;
 
     protected $listeners = [
         'confirm_destroy' => 'confirm_destroy'
@@ -88,7 +89,10 @@ class ListUsers extends AdminComponent
 
     public function render()
     {
-        $users = User::latest()->paginate(5);
+        $users = User::where('name', 'like', '%'.$this->search_keywords.'%')
+            ->orWhere('email', 'like', '%'.$this->search_keywords.'%')
+            ->latest()->paginate(5);
+
         return view('livewire.admin.users.list-users', [
             'users' => $users
         ]);

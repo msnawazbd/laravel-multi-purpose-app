@@ -50,8 +50,8 @@
                                     <tr>
                                         <td>{{ $appointments->firstItem() + $key }}</td>
                                         <td>{{ $appointment->client->name }}</td>
-                                        <td>{{ $appointment->date->toFormattedDate() }}</td>
-                                        <td>{{ $appointment->time->toFormattedTime() }}</td>
+                                        <td>{{ $appointment->date }}</td>
+                                        <td>{{ $appointment->time }}</td>
                                         <td>
                                             <span
                                                 class="badge badge-{{ $appointment->status_badge }}">{{ $appointment->status }}</span>
@@ -61,8 +61,8 @@
                                             </button>
                                             <a href="{{ route('admin.appointments.edit', $appointment) }}" class="btn btn-primary btn-sm"><i
                                                     class="fas fa-edit"></i></a>
-                                            <button type="button" class="btn btn-danger btn-sm"><i
-                                                    class="fas fa-trash"></i></button>
+                                            <button type="button" wire:click.prevent="destroy({{ $appointment->id }})"
+                                                    class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
                                         </td>
                                         </td>
                                     </tr>
@@ -71,7 +71,9 @@
                             </table>
                         </div>
                         <!-- /.card-body -->
-                        <div class="card-footer"></div>
+                        <div class="card-footer">
+                            {{ $appointments->links() }}
+                        </div>
                     </div>
                 </div>
                 <!-- /.col-md-12 -->
@@ -81,3 +83,7 @@
     </div>
     <!-- /.content -->
 </div>
+
+<!-- confirmation-alert components -->
+<x-confirmation-alert/>
+<!-- /. confirmation-alert components -->

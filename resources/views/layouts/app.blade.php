@@ -109,6 +109,11 @@
         $('#cu-form').modal('show');
     })
 </script>
+<script>
+    window.addEventListener('alert', event => {
+        toastr.success(event.detail.message, 'Success!')
+    })
+</script>
 
 <!-- Custom Script -->
 @stack('js')

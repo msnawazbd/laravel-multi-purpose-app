@@ -40,12 +40,17 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="client_id">Client:</label>
-                                            <select class="form-control" wire:model.defer="state.client_id" id="client_id">
-                                                <option value="" selected disabled>Select One</option>
+                                            <select class="form-control @error('client_id') is-invalid @enderror" wire:model.defer="state.client_id" id="client_id">
+                                                <option value="">Select One</option>
                                                 @foreach($clients as $client)
                                                 <option value="{{ $client->id }}">{{ $client->name }}</option>
                                                 @endforeach
                                             </select>
+                                            @error('client_id')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -80,10 +85,30 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="status">Status:</label>
+                                            <select id="status" wire:model.defer="state.status" class="form-control @error('status') is-invalid @enderror">
+                                                <option value="">Select Status</option>
+                                                <option value="SCHEDULED">Scheduled</option>
+                                                <option value="CLOSED">Closed</option>
+                                            </select>
+                                            @error('status')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                    </div>
                                     <div class="col-md-12">
                                         <div wire:ignore class="form-group">
                                             <label for="note">Note:</label>
-                                            <textarea id="note" data-note="@this" wire:model.defer="state.note" class="form-control"></textarea>
+                                            <textarea id="note" data-note="@this" wire:model.defer="state.note" class="form-control @error('note') is-invalid @enderror"></textarea>
+                                            @error('note')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>

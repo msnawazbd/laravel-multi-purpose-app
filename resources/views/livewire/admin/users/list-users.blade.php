@@ -25,10 +25,11 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <div class="card-tools">
+                            <div class="d-flex justify-content-between">
                                 <button class="btn btn-primary btn-sm" wire:click="create"><i class="fas fa-plus"></i>
                                     &nbsp; Add User
                                 </button>
+                                <x-search-input wire:model="search_keywords"/>
                             </div>
                         </div>
                         <!-- /.card-header -->
@@ -44,7 +45,7 @@
                                     <th class="text-right">Action</th>
                                 </tr>
                                 </thead>
-                                <tbody>
+                                <tbody wire:loading.class="text-muted">
                                 @foreach($users as $key => $user)
                                     <tr>
                                         <td>{{ $users->firstItem() + $key }}</td>
@@ -53,7 +54,8 @@
                                         <td>{{ $user->created_at->toFormattedDate() }}</td>
                                         <td>{{ $user->updated_at->toFormattedDate() }}</td>
                                         <td class="text-right">
-                                            <button type="button" class="btn btn-info btn-sm"><i class="fas fa-eye"></i></button>
+                                            <button type="button" class="btn btn-info btn-sm"><i class="fas fa-eye"></i>
+                                            </button>
                                             <button type="button" wire:click.prevent="edit({{ $user }})"
                                                     class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></button>
                                             <button type="button" wire:click.prevent="destroy({{ $user->id }})"
@@ -136,7 +138,9 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times"></i> Close</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
+                                class="fas fa-times"></i> Close
+                        </button>
                         <button type="submit" class="btn btn-primary">
                             <i class="fas fa-save"></i>
                             @if($show_edit_modal)
