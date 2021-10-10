@@ -1,4 +1,5 @@
 <div>
+    <x-loading-indicator />
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
@@ -25,11 +26,29 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <div class="card-tools">
-                                <a href="{{ route('admin.appointments.create') }}" class="btn btn-primary btn-sm"><i
-                                        class="fas fa-plus"></i>
-                                    &nbsp; Add Appointment
-                                </a>
+                            <div class="d-flex justify-content-between mb-2">
+                                <div>
+                                    <a href="{{ route('admin.appointments.create') }}" class="btn btn-primary btn-sm"><i
+                                            class="fas fa-plus"></i>
+                                        &nbsp; Add Appointment
+                                    </a>
+                                </div>
+                                <div class="btn-group">
+                                    <button wire:click="filter_by_status" type="button" class="btn {{ is_null($status) ? 'btn-secondary' : 'btn-default' }}">
+                                        <span class="mr-1">All</span>
+                                        <span class="badge badge-pill badge-info">{{ $total_appointment }}</span>
+                                    </button>
+
+                                    <button wire:click="filter_by_status('scheduled')" type="button" class="btn {{ ($status === 'scheduled') ? 'btn-secondary' : 'btn-default' }}">
+                                        <span class="mr-1">Scheduled</span>
+                                        <span class="badge badge-pill badge-primary">{{ $scheduled_appointment }}</span>
+                                    </button>
+
+                                    <button wire:click="filter_by_status('closed')" type="button" class="btn {{ ($status === 'closed') ? 'btn-secondary' : 'btn-default' }}">
+                                        <span class="mr-1">Closed</span>
+                                        <span class="badge badge-pill badge-success">{{ $closed_appointment }}</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                         <!-- /.card-header -->
