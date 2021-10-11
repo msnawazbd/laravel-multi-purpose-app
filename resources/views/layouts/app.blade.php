@@ -17,12 +17,15 @@
     <!-- Date Time Picker  -->
     <link href="{{ asset('backend/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}"
           rel="stylesheet"/>
+    <!-- iCheck -->
+    <link rel="stylesheet" href="{{ asset('backend/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
     <!-- Custom style -->
 @stack('styles')
 <!-- Live wire style -->
     <livewire:styles/>
 </head>
-<body class="hold-transition sidebar-mini text-sm">
+<body class=" hold-transition sidebar-mini text-sm
+    ">
 <div class="wrapper">
 
     <!-- Navbar -->
@@ -108,9 +111,12 @@
     window.addEventListener('show-form', event => {
         $('#cu-form').modal('show');
     })
-</script>
-<script>
+
     window.addEventListener('alert', event => {
+        toastr.success(event.detail.message, 'Success!')
+    })
+
+    window.addEventListener('updated', event => {
         toastr.success(event.detail.message, 'Success!')
     })
 </script>
