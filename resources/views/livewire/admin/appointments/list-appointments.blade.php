@@ -42,11 +42,14 @@
                                             <div class="dropdown-menu" role="menu" style="">
                                                 <a wire:click.prevent="deleteSelectedRows" class="dropdown-item"
                                                    href="#">Delete Selected</a>
-                                                <a wire:click.prevent="markAllAsScheduled" class="dropdown-item" href="#">Mark as Scheduled</a>
-                                                <a wire:click.prevent="markAllAsClosed" class="dropdown-item" href="#">Mark as Closed</a>
+                                                <a wire:click.prevent="markAllAsScheduled" class="dropdown-item"
+                                                   href="#">Mark as Scheduled</a>
+                                                <a wire:click.prevent="markAllAsClosed" class="dropdown-item" href="#">Mark
+                                                    as Closed</a>
                                             </div>
                                         </div>
-                                        <span class="ml-2">Selected {{ count($selected_rows) }} {{ \Illuminate\Support\Str::plural('appointment', count($selected_rows)) }}</span>
+                                        <span
+                                            class="ml-2">Selected {{ count($selected_rows) }} {{ Str::plural('appointment', count($selected_rows)) }}</span>
                                     @endif
                                 </div>
                                 <div class="btn-group">
