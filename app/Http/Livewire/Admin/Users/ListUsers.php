@@ -20,6 +20,7 @@ class ListUsers extends AdminComponent
 
     public function create()
     {
+        $this->show_edit_modal = false;
         $this->state = [];
         $this->dispatchBrowserEvent('show-form');
     }
@@ -89,8 +90,8 @@ class ListUsers extends AdminComponent
 
     public function render()
     {
-        $users = User::where('name', 'like', '%'.$this->search_keywords.'%')
-            ->orWhere('email', 'like', '%'.$this->search_keywords.'%')
+        $users = User::where('name', 'like', '%' . $this->search_keywords . '%')
+            ->orWhere('email', 'like', '%' . $this->search_keywords . '%')
             ->latest()->paginate(5);
 
         return view('livewire.admin.users.list-users', [
